@@ -1,7 +1,6 @@
 #######################
 # ***    PLUGINS   *** #
 ########################
-set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'christoomey/vim-tmux-navigator'
 
 ########################
@@ -92,9 +91,9 @@ set -g status-justify centre
 # Set default bg/fg settings for status bar
 set-option -g status-style bright,bg='#1B2B34',fg=default
 
-set-window-option -g window-status-current-format ''
-set-window-option -g window-status-current-format ''
-set-window-option -g window-status-current-style fg=colour114,bg=default,bright
+set-window-option -g window-status-current-style fg=colour14,bg=default,bright
+setw -g window-status-current-format '#[fg=#1B2B34,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #I  #W  #F #[fg=colour238,bg=#1B2B34,nobold,nounderscore,noitalics]'
+setw -g window-status-format '#[fg=#1B2B34,bg=colour0,nobold,nounderscore,noitalics]#[fg=colour7,bg=colour0] #I  #W #[fg=colour0,bg=#1B2B34,nobold,nounderscore,noitalics]'
 
 # Configure CPU plugin colors for statusline
 set -g @cpu_low_fg_color "#[fg=green]"
@@ -105,9 +104,6 @@ set -g @cpu_low_bg_color "#[bg=default]"
 set -g @cpu_medium_bg_color "#[bg=default]"
 set -g @cpu_high_bg_color "#[bg=default]"
 
-# Left Status Bar: [CPU Usage]
-set -g status-left "#{cpu_bg_color}#{cpu_fg_color} #{cpu_icon}#{cpu_percentage}"
-set -g status-left-length 85
 
 # Right Status Bar: [Session Name][Date][Time]
 set -g status-right "#[fg=magenta]#S #[fg=colour8]‹#[fg=yellow]#[fg=yellow,bold,bg=default] %b %d %Y #[fg=colour8]‹#[fg=green,bg=default]#[bg=default,fg=green,bold]%l:%M %p #[fg=blue]"
