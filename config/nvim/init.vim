@@ -26,10 +26,11 @@ set hidden
 " Insert spaces when TAB is pressed.
 
 " Change number of spaces that a <Tab> counts for during editing ops
-set tabstop=4
+set tabstop=2
 
 " Indentation amount for < and > commands.
-set shiftwidth=4
+set shiftwidth=2
+set softtabstop=2
 
 " do not wrap long lines by default
 set nowrap
@@ -201,9 +202,14 @@ endif
 " VimWiki
 " vimwiki
 let wiki_1 = {}
-let wiki_1.path = '~/Documents/VimWiki/'
+let wiki_1.path = '~/wiki'
 let wiki_1.syntax = 'markdown'
 let wiki_1.ext = '.md'
+let wiki_1.template_path = '~/wiki/Templates'
+let wiki_1.template_default = 'def_template'
+let wiki_1.path_html = '~/wikiHTML'
+let wiki_1.custom_wiki2html = 'vimwiki_markdown'
+let wiki_1.template_ext = '.html'
 
 let g:vimwiki_list = [wiki_1]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
