@@ -92,8 +92,8 @@ set -g status-justify centre
 set-option -g status-style bright,bg='#1B2B34',fg=default
 
 set-window-option -g window-status-current-style fg=colour14,bg=default,bright
-setw -g window-status-current-format '#[fg=#1B2B34,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #I  #W  #F #[fg=colour238,bg=#1B2B34,nobold,nounderscore,noitalics]'
-setw -g window-status-format '#[fg=#1B2B34,bg=colour0,nobold,nounderscore,noitalics]#[fg=colour7,bg=colour0] #I  #W #[fg=colour0,bg=#1B2B34,nobold,nounderscore,noitalics]'
+setw -g window-status-current-format '#[fg=#1B2B34,bg=colour0,nobold,nounderscore,noitalics]#[fg=colour7,bg=colour0] #I  #W #[fg=colour0,bg=#1B2B34,nobold,nounderscore,noitalics]'
+setw -g window-status-format '#[fg=#1B2B34,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #I  #W  #F #[fg=colour238,bg=#1B2B34,nobold,nounderscore,noitalics]'
 
 # Configure CPU plugin colors for statusline
 set -g @cpu_low_fg_color "#[fg=green]"

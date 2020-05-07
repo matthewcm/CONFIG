@@ -79,7 +79,6 @@ let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir
 set termguicolors
 
 " Editor theme
-set background=dark
 try
   colorscheme OceanicNext
 catch
@@ -105,8 +104,8 @@ hi! StatusLine guifg=#16252b guibg=#6699CC
 hi! StatusLineNC guifg=#16252b guibg=#16252b
 
 " Try to hide vertical spit and end of buffer symbol
-hi! VertSplit gui=NONE guifg=#17252c guibg=#17252c
-hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=#17252c guifg=#17252c
+hi! VertSplit gui=NONE guifg=#17252c guibg=NONE
+hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=NONE guifg=#17252c
 
 " Customize NERDTree directory
 hi! NERDTreeCWD guifg=#99c794
@@ -190,7 +189,7 @@ if has('persistent_undo')
   set undolevels=3000
   set undoreload=10000
 endif
-set backupdir=~/.local/share/nvim/backup " Don't put backups in current dir
+set backupdir=~/.vim/backups
 set backup
 set noswapfile
 

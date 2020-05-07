@@ -108,36 +108,6 @@ p() {
     git checkout HEAD^1
 }
 
-set_http_proxy() {
-  if [ -e $HOME/.proxyrc ]; then
-    . $HOME/.proxyrc
-  fi  
-
-  if [ -z $http_proxy ]; then 
-    http_proxy="http://systemID:password@proxy.gtm.lilly.com:9000/"
-    https_proxy="http://systemID:password@proxy.gtm.lilly.com:9000/"
-    echo "export http_proxy=$http_proxy" > $HOME/.proxyrc
-    echo "export HTTP_PROXY=$http_proxy" >> $HOME/.proxyrc
-    echo "export https_proxy=$https_proxy" >> $HOME/.proxyrc
-    echo "export HTTPS_PROXY=$https_proxy" >> $HOME/.proxyrc
-    . $HOME/.proxyrc
-  fi  
-}
-
-kill_http_proxy() {
-  rm $HOME/.proxyrc
-  unset_http_proxy
-}
-
-unset_http_proxy() {
-  unset http_proxy
-  unset HTTP_PROXY
-  unset https_proxy
-  unset HTTPS_PROXY
-}
-
-# set the proxy
-set_http_proxy
 
 # Enabled zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -149,11 +119,13 @@ export EDITOR='nvim'
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # Aliases
-alias vim="~/nvim/bin/nvim"
+alias vim="nvim"
 alias top="vtop --theme=wizard"
 alias ls="colorls -lA --sd"
 alias st=" toilet --gay --font mono9 --t "
 alias yarn='nocorrect yarn'
+
+export PATH="$(yarn global bin):$PATH"
 
 
 source $ZSH/oh-my-zsh.sh
