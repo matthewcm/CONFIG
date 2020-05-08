@@ -29,7 +29,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode git node brew tmux)
+plugins=(vi-mode git node brew tmux z)
 
 # Setting rg as the default source for fzf
 export FZF_DEFAULT_COMMAND='rg --files'
@@ -40,7 +40,24 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Set location of z installation
 . /usr/local/etc/profile.d/z.sh
 
+
+
 ## FZF FUNCTIONS ##
+#
+
+unalias z
+z() {
+  if [[ -z "$*" ]]; then
+    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
+  else
+    _last_z_args="$@"
+    _z "$@"
+  fi
+}
+
+zz() {
+  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
+}
 
 # fo [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)

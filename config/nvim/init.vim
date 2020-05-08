@@ -1,219 +1,122 @@
-scriptencoding utf-8
-source ~/.config/nvim/plugins.vim
+syntax on
 
-" ============================================================================ "
-" ===                           EDITING OPTIONS                            === "
-" ============================================================================ "
 
-" Remap leader key to ,
-let g:mapleader='\'
-
-" Disable line numbers
-set nonumber
-
-set mouse=a
-
-" Don't show last command
-set noshowcmd
-
-" Yank and paste with the system clipboard
-set clipboard=unnamed
-
-" Hides buffers instead of closing them
 set hidden
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
 
-" === TAB/Space settings === "
-" Insert spaces when TAB is pressed.
+set number
+set relativenumber
 
-" Change number of spaces that a <Tab> counts for during editing ops
-set tabstop=2
-
-" Indentation amount for < and > commands.
-set shiftwidth=2
-set softtabstop=2
-
-" do not wrap long lines by default
-set nowrap
-
-" Don't highlight current cursor line
-set nocursorline
-
-" Disable line/column number in status line
-" Shows up in preview window when airline is disabled if not
-set noruler
-
-" Only one line for command line
-set cmdheight=1
-
-" === Completion Settings === "
-
-" Don't give completion messages like 'match 1 of 2'
-" or 'The only match'
-set shortmess+=c
+set lbr
+set nolist
+set wrap
 
 
-" ============================================================================ "
-" ===                           PLUGIN SETUP                               === "
-" ============================================================================ "
-
-
-" === NERDTree === "
-" Show hidden files/directories
-let g:NERDTreeShowHidden = 1
-
-" Remove bookmarks and help text from NERDTree
-let g:NERDTreeMinimalUI = 1
-
-" Custom icons for expandable/expanded directories
-let g:NERDTreeDirArrowExpandable = '⬏'
-let g:NERDTreeDirArrowCollapsible = '⬎'
-
-" Hide certain files and directories from NERDTree
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
-
-" ============================================================================ "
-" ===                                UI                                    === "
-" ============================================================================ "
-
-" Enable true color support
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
 set termguicolors
 
-" Editor theme
-try
-  colorscheme OceanicNext
-catch
-  colorscheme slate
-endtry
+set cmdheight=2
+
+set updatetime=500
+
+set shortmess+=c
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 
-" Change vertical split character to be a space (essentially hide it)
-set fillchars+=vert:.
+call plug#begin('~/.vim/plugged')
 
-" Set preview window to appear at bottom
-set splitbelow
+" Colorschemes
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
 
-" Don't dispay mode in command line 
-"set noshowmode
+" Language Picker uppers
+Plug 'w0rp/ale'
+Plug 'neoclide/coc.nvim', {'branch':'release'}
+Plug 'sheerun/vim-polyglot'
 
-" Make background transparent for many things
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
-hi! LineNr ctermfg=NONE guibg=NONE
-hi! SignColumn ctermfg=NONE guibg=NONE
-hi! StatusLine guifg=#16252b guibg=#6699CC
-hi! StatusLineNC guifg=#16252b guibg=#16252b
+" Fuzzy
+Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-" Try to hide vertical spit and end of buffer symbol
-hi! VertSplit gui=NONE guifg=#17252c guibg=NONE
-hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=NONE guifg=#17252c
+" Undo history
+Plug 'mbbill/undotree'
 
-" Customize NERDTree directory
-hi! NERDTreeCWD guifg=#99c794
+" Git
+Plug 'tpope/vim-fugitive'
 
+" Smart Starting
+Plug 'mhinz/vim-startify'
 
-" Call method on window enter
-augroup WindowManagement
-  autocmd!
-  autocmd WinEnter * call Handle_Win_Enter()
-augroup END
+" Motion
+Plug 'justinmk/vim-sneak'
 
-" Change highlight group of preview window when open
-function! Handle_Win_Enter()
-  if &previewwindow
-    setlocal winhighlight=Normal:MarkdownError
-  endif
-endfunction
+call plug#end()
 
-" ============================================================================ "
-" ===                             KEY MAPPINGS                             === "
-" ============================================================================ "
+set background=dark
+colorscheme gruvbox
 
 
-" === Nerdtree shorcuts === "
-"  <leader>n - Toggle NERDTree on/off
-"  <leader>f - Opens current file location in NERDTree
-nmap <leader>v :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
+let loaded_matchparen = 1
+let mapleader = " "
 
-"   <Space> - PageDown
-"   -       - PageUp
-noremap <Space> <PageDown>
-noremap - <PageUp>
+let g:netrw_browse_split = 2
+let g:vrfr_rg = 'true'
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
 
-" === vim-better-whitespace === "
-"   <leader>y - Automatically remove trailing whitespace
-nmap <leader>y :StripWhitespace<CR>
+let g:ale_fixers = {
+ \ 'javascript': ['eslint']
+ \ }
+ 
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
 
-" === Search shorcuts === "
-"   <leader>h - Find and replace
-"   <leader>/ - Claer highlighted search terms while preserving history
-map <leader>h :%s///<left><left>
-nmap <silent> <leader>/ :nohlsearch<CR>
-
-" === Easy-motion shortcuts ==="
-"   <leader>q - Easy-motion highlights first word letters bi-directionally
-map <leader>q <Plug>(easymotion-bd-w)
-
-" Allows you to save files you opened without write permissions via sudo
-cmap w!! w !sudo tee %
+let g:ale_fix_on_save = 1
 
 
-" Delete current visual selection and dump in black hole buffer before pasting
-" Used when you want to paste over something without it getting copied to
-" Vim's default buffer
-vnoremap <leader>p "_dP
+" GO TO COC
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gD <Plug>(coc-declaration)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gi <Plug>(coc-implementation)
 
-" ============================================================================ "
-" ===                                 MISC.                                === "
-" ============================================================================ "
+" Fuzzy Files
+nnoremap <C-p> :GFiles <CR>
+nnoremap <Leader>pf :Files<CR>
 
-" Automaticaly close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Window Moving
+nnoremap h :wincmd h<CR>
+nnoremap j :wincmd j<CR>
+nnoremap k :wincmd k<CR>
+nnoremap l :wincmd l<CR>
 
-" === Search === "
-" ignore case when searching
-set ignorecase
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
 
-" if the search string has an upper case letter in it, the search will be case sensitive
-set smartcase
+" UNDO TREE - REALLY COOL STUFF, VERSION CONTROL ()
+nnoremap <leader>u :UndotreeShow<CR>
 
-" Automatically re-read file if a change was detected outside of vim
-set autoread
 
-" Enable line numbers
-set number
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-" Set backups
-if has('persistent_undo')
-  set undofile
-  set undolevels=3000
-  set undoreload=10000
-endif
-set backupdir=~/.vim/backups
-set backup
-set noswapfile
 
-" Reload icons after init source
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
+" HARD MODE
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
-" VimWiki
-" vimwiki
-let wiki_1 = {}
-let wiki_1.path = '~/wiki'
-let wiki_1.syntax = 'markdown'
-let wiki_1.ext = '.md'
-let wiki_1.template_path = '~/wiki/Templates'
-let wiki_1.template_default = 'def_template'
-let wiki_1.path_html = '~/wikiHTML'
-let wiki_1.custom_wiki2html = 'vimwiki_markdown'
-let wiki_1.template_ext = '.html'
-
-let g:vimwiki_list = [wiki_1]
-let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-
-:autocmd filetype vimwiki map <leader>d :VimwikiMakeDiaryNote<cr>
-let g:vimwiki_listsyms = "✗○◐●✓"
-:autocmd filetype vimwiki map <leader>c :call ToggleCalendar()<cr>
-:autocmd filetype vimwiki map <leader>g :VimwikiDiaryGenerateLinks<cr>
