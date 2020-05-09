@@ -125,7 +125,14 @@ p() {
     git checkout HEAD^1
 }
 
+chpwd() {
+  colorls -lA --sd
+}
 
+
+mann() {
+  man -k . | gshuf | awk  '{print $1}' |sed 's/(.*//g'| head -1 | xargs man
+}
 # Enabled zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 

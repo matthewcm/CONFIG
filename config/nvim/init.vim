@@ -3,8 +3,8 @@ syntax on
 
 set hidden
 set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=2 softtabstop=2
+set shiftwidth=2
 set expandtab
 set smartindent
 
@@ -17,8 +17,8 @@ set wrap
 
 
 set smartcase
-set noswapfile
-set nobackup
+set backup
+
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
@@ -60,7 +60,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-startify'
 
 " Motion
-Plug 'justinmk/vim-sneak'
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 
