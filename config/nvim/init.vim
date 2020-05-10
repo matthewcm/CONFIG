@@ -96,6 +96,7 @@ nmap <leader>gi <Plug>(coc-implementation)
 " Fuzzy Files
 nnoremap <C-p> :GFiles <CR>
 nnoremap <Leader>pf :Files<CR>
+nnoremap <Leader>bf :Buffers<CR>
 
 " Window Moving
 nnoremap h :wincmd h<CR>

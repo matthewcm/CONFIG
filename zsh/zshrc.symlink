@@ -1,4 +1,6 @@
 # Path to oh-my-zsh installation.
+#
+
 export ZSH=~/.oh-my-zsh
 
 
@@ -38,7 +40,7 @@ export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Set location of z installation
-. /usr/local/etc/profile.d/z.sh
+. /usr/share/z/z.sh
 
 
 
@@ -126,7 +128,7 @@ p() {
 }
 
 chpwd() {
-  colorls -lA --sd
+  colorls -At --gs --sd
 }
 
 
@@ -142,17 +144,15 @@ export EDITOR='nvim'
 # Enabled true color support for terminals
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-# Aliases
-alias vim="nvim"
-alias top="vtop --theme=wizard"
-alias ls="colorls -lA --sd"
-alias st=" toilet --gay --font mono9 --t "
-alias yarn='nocorrect yarn'
 
-export PATH="$(yarn global bin):$PATH"
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$(yarn global bin):$PATH"
 
 
 source $ZSH/oh-my-zsh.sh
 
-# Set Spaceship as prompt
-
+# Aliases
+alias vim="nvim"
+alias top="vtop --theme=wizard"
+alias ls="colorls -At --gs --sd"
+alias st=" toilet --gay --font mono9 --t "
+alias yarn='nocorrect yarn'
